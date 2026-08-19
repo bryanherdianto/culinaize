@@ -1,36 +1,37 @@
 "use client"
 
+import Image from "next/image";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { ThemeProvider, Typography, Card, CardBody } from "@material-tailwind/react"
-import { AcademicCapIcon, UsersIcon, TrophyIcon, HeartIcon } from "@heroicons/react/24/solid"
+import { Typography, Card, CardBody } from "@material-tailwind/react"
+import { MagnifyingGlassIcon, SparklesIcon, CameraIcon, LockOpenIcon } from "@heroicons/react/24/solid"
 
 const STATS = [
   {
-    icon: UsersIcon,
-    title: "10,000+",
-    description: "Students Enrolled",
+    icon: MagnifyingGlassIcon,
+    title: "RAG-powered",
+    description: "Answers are retrieved from real recipe data before they are written, not guessed.",
   },
   {
-    icon: AcademicCapIcon,
-    title: "50+",
-    description: "Expert Instructors",
+    icon: SparklesIcon,
+    title: "Gemini + Spoonacular",
+    description: "Gemini does the reasoning; Spoonacular supplies the recipes it reasons over.",
   },
   {
-    icon: TrophyIcon,
-    title: "95%",
-    description: "Success Rate",
+    icon: CameraIcon,
+    title: "Photo input",
+    description: "Snap or paste a picture of your ingredients instead of typing them out.",
   },
   {
-    icon: HeartIcon,
-    title: "5 Years",
-    description: "Experience",
+    icon: LockOpenIcon,
+    title: "Free",
+    description: "No cost and no card. Sign in with GitHub and start cooking.",
   },
 ]
 
 export default function AboutUs() {
   return (
-    <ThemeProvider>
+    <>
       <Navbar />
 
       {/* Hero Section */}
@@ -42,8 +43,8 @@ export default function AboutUs() {
               About Us
             </Typography>
             <Typography variant="lead" color="white" className="mt-6 mb-10 w-full md:max-w-full lg:max-w-2xl">
-              We&apos;re passionate about empowering developers with the skills they need to build amazing React applications
-              and advance their careers.
+              We built a cooking assistant that starts from what is already in your kitchen, works around
+              your diet and the time you have, and points you at a recipe you can actually make tonight.
             </Typography>
           </div>
         </div>
@@ -56,8 +57,9 @@ export default function AboutUs() {
             Our Mission
           </Typography>
           <Typography variant="lead" className="mb-16 font-normal !text-gray-500">
-            To provide world-class React education that transforms beginners into confident developers through hands-on
-            learning, expert guidance, and a supportive community.
+            Most cooking sites start with a recipe and send you shopping. We start from the other end:
+            tell CulinAIze what you have, what you cannot eat, and how long you have got, and let it find
+            something that fits.
           </Typography>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -67,7 +69,7 @@ export default function AboutUs() {
                   <div className="mx-auto mb-4 grid size-16 place-items-center rounded-full bg-gray-900">
                     <Icon className="size-8 text-white" />
                   </div>
-                  <Typography variant="h3" color="blue-gray" className="mb-2">
+                  <Typography variant="h5" color="blue-gray" className="mb-2">
                     {title}
                   </Typography>
                   <Typography className="font-normal !text-gray-500">{description}</Typography>
@@ -87,23 +89,27 @@ export default function AboutUs() {
                 Our Story
               </Typography>
               <Typography variant="lead" className="mb-6 font-normal !text-gray-500">
-                Founded in 2024, CulinAIze started with a simple vision: make React learning accessible to everyone,
-                regardless of their background or experience level.
+                CulinAIze started in 2024 as a small project by the two of us, built around a question we kept running
+                into ourselves: what do you cook when you have half a fridge of odds and ends and no plan?
               </Typography>
               <Typography className="mb-4 font-normal !text-gray-500">
-                What began as a small online course has grown into a comprehensive learning platform trusted by
-                thousands of developers worldwide. Our team of industry experts brings real-world experience to every
-                lesson.
+                Under the hood it is a retrieval-augmented pipeline running in n8n. Your message goes to a
+                workflow that pulls candidate recipes from Spoonacular and hands them to Gemini, so the
+                answer you get back is grounded in a real recipe database rather than invented on the spot.
               </Typography>
               <Typography className="font-normal !text-gray-500">
-                Today, we continue to innovate and expand our offerings, always keeping our students&apos; success at the
-                heart of everything we do.
+                It is still small and still growing. If something is wrong or missing, the code is open and
+                the issue tracker is the fastest way to tell us.
               </Typography>
             </div>
-            <div className="rounded-xl bg-gray-200 h-96 flex items-center justify-center">
-              <Typography variant="h6" color="blue-gray">
-                [Company Story Image Placeholder]
-              </Typography>
+            <div className="relative h-96 overflow-hidden rounded-xl">
+              <Image
+                src="/image/food.jpg"
+                alt="A spread of fresh ingredients on a kitchen counter"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
             </div>
           </div>
         </div>
@@ -123,10 +129,11 @@ export default function AboutUs() {
             <Card>
               <CardBody className="text-center">
                 <Typography variant="h5" color="blue-gray" className="mb-4">
-                  Excellence
+                  Accuracy
                 </Typography>
                 <Typography className="font-normal !text-gray-500">
-                  We strive for the highest quality in our courses, content, and student support.
+                  Recipes are grounded in real data, and we would rather say we do not know than make
+                  something up. Always check allergens and food safety yourself.
                 </Typography>
               </CardBody>
             </Card>
@@ -137,7 +144,8 @@ export default function AboutUs() {
                   Accessibility
                 </Typography>
                 <Typography className="font-normal !text-gray-500">
-                  Learning should be available to everyone, regardless of background or circumstances.
+                  Free to use, works on the phone in your kitchen, and handles dietary restrictions and
+                  intolerances as a first-class input rather than an afterthought.
                 </Typography>
               </CardBody>
             </Card>
@@ -145,10 +153,11 @@ export default function AboutUs() {
             <Card>
               <CardBody className="text-center">
                 <Typography variant="h5" color="blue-gray" className="mb-4">
-                  Community
+                  Zero Waste
                 </Typography>
                 <Typography className="font-normal !text-gray-500">
-                  We believe in the power of learning together and supporting each other&apos;s growth.
+                  Cook what you already have. Every suggestion starts from the ingredients in your kitchen,
+                  not from a shopping list.
                 </Typography>
               </CardBody>
             </Card>
@@ -157,6 +166,6 @@ export default function AboutUs() {
       </section>
 
       <Footer />
-    </ThemeProvider>
+    </>
   )
 }

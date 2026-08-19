@@ -2,26 +2,35 @@
 
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { ThemeProvider, Typography, Card, CardBody } from "@material-tailwind/react"
+import { Typography, Card, CardBody } from "@material-tailwind/react"
 
 const TEAM_MEMBERS = [
   {
     name: "Bryan Herdianto",
     role: "Frontend Developer",
-    bio: "10+ years of React development experience at top tech companies.",
-    image: "/placeholder.svg?height=300&width=300",
+    bio: "Builds the CulinAIze web app — the chat interface, the site, and everything you click on.",
+    github: "bryanherdianto",
   },
   {
     name: "Wesley Frederick Oh",
     role: "Backend Developer",
-    bio: "Former Facebook engineer specializing in React performance optimization.",
-    image: "/placeholder.svg?height=300&width=300",
-  }
+    bio: "Builds the n8n workflow behind the assistant, wiring Gemini and Spoonacular into the answers you get back.",
+    github: null,
+  },
 ]
+
+function initials(name: string) {
+  return name
+    .split(" ")
+    .map((part) => part[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase()
+}
 
 export default function Team() {
   return (
-    <ThemeProvider>
+    <>
       <Navbar />
 
       {/* Hero Section */}
@@ -33,7 +42,7 @@ export default function Team() {
               Meet Our Team
             </Typography>
             <Typography variant="lead" color="white" className="mt-6 mb-10 w-full md:max-w-full lg:max-w-2xl">
-              The passionate educators and developers behind your React learning journey.
+              The two people who built CulinAIze.
             </Typography>
           </div>
         </div>
@@ -43,25 +52,26 @@ export default function Team() {
       <section className="py-28 px-8">
         <div className="container mx-auto max-w-4xl text-center">
           <Typography variant="h2" color="blue-gray" className="mb-4">
-            Our Expert Team
+            Who We Are
           </Typography>
           <Typography variant="lead" className="mb-16 font-normal !text-gray-500">
-            We&apos;re a diverse group of industry professionals, educators, and React enthusiasts committed to your success.
-            Each team member brings unique expertise and real-world experience to help you master React development.
+            CulinAIze is a two-person project: one of us on the app you are looking at, the other on the
+            workflow that answers your questions. If you have found a bug or want to suggest something,
+            the GitHub repository is the best place to reach us.
           </Typography>
         </div>
       </section>
 
       {/* Team Members Grid */}
       <section className="pb-28 px-8">
-        <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {TEAM_MEMBERS.map((member, index) => (
-              <Card key={index} className="text-center">
+        <div className="container mx-auto max-w-3xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {TEAM_MEMBERS.map((member) => (
+              <Card key={member.name} className="text-center">
                 <CardBody>
-                  <div className="mx-auto mb-6 size-32 rounded-full bg-gray-200 flex items-center justify-center">
-                    <Typography variant="small" color="blue-gray">
-                      [Photo]
+                  <div className="mx-auto mb-6 grid size-32 place-items-center rounded-full bg-gray-900">
+                    <Typography variant="h3" color="white">
+                      {initials(member.name)}
                     </Typography>
                   </div>
                   <Typography variant="h5" color="blue-gray" className="mb-2">
@@ -71,6 +81,18 @@ export default function Team() {
                     {member.role}
                   </Typography>
                   <Typography className="font-normal !text-gray-500">{member.bio}</Typography>
+                  {member.github && (
+                    <Typography
+                      as="a"
+                      href={`https://github.com/${member.github}`}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      variant="small"
+                      className="mt-4 inline-block font-medium text-gray-900 hover:underline"
+                    >
+                      @{member.github}
+                    </Typography>
+                  )}
                 </CardBody>
               </Card>
             ))}
@@ -78,6 +100,6 @@ export default function Team() {
         </div>
       </section>
       <Footer />
-    </ThemeProvider>
+    </>
   )
 }

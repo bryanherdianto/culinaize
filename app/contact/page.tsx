@@ -2,12 +2,40 @@
 
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { ThemeProvider, Typography, Card, CardBody, Input, Textarea, Button } from "@material-tailwind/react"
-import { PhoneIcon, EnvelopeIcon, MapPinIcon } from "@heroicons/react/24/solid"
+import { Typography } from "@material-tailwind/react"
+import { BugAntIcon, CodeBracketIcon, UsersIcon } from "@heroicons/react/24/solid"
+
+const REPO_URL = "https://github.com/bryanherdianto/culinaize"
+
+const CHANNELS = [
+  {
+    icon: BugAntIcon,
+    title: "Report an issue",
+    description:
+      "Found a bug, or got a recipe that was plainly wrong? Open an issue and we will see it.",
+    linkLabel: "github.com/bryanherdianto/culinaize/issues",
+    href: `${REPO_URL}/issues`,
+  },
+  {
+    icon: CodeBracketIcon,
+    title: "Read the source",
+    description:
+      "CulinAIze is open source. Browse the code, or open a pull request if you want to fix something yourself.",
+    linkLabel: "github.com/bryanherdianto/culinaize",
+    href: REPO_URL,
+  },
+  {
+    icon: UsersIcon,
+    title: "Who builds this",
+    description: "Two people. See who we are and what each of us works on.",
+    linkLabel: "Meet the team",
+    href: "/team",
+  },
+]
 
 export default function ContactUs() {
   return (
-    <ThemeProvider>
+    <>
       <Navbar />
 
       {/* Hero Section */}
@@ -19,100 +47,56 @@ export default function ContactUs() {
               Contact Us
             </Typography>
             <Typography variant="lead" color="white" className="mt-6 mb-10 w-full md:max-w-full lg:max-w-2xl">
-              Get in touch with our team. We&apos;re here to help you with any questions about our React course and learning
-              platform.
+              CulinAIze is a small open-source project, so everything happens on GitHub. That is the
+              fastest way to reach us and the only one we actually watch.
             </Typography>
           </div>
         </div>
       </div>
 
-      {/* Contact Form and Info Section */}
+      {/* Contact Channels */}
       <section className="py-28 px-8">
-        <div className="container mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <div>
-              <Typography variant="h3" color="blue-gray" className="mb-4">
-                Send us a Message
-              </Typography>
-              <Typography variant="lead" className="mb-8 font-normal !text-gray-500">
-                Fill out the form below and we&apos;ll get back to you as soon as possible.
-              </Typography>
+        <div className="container mx-auto max-w-4xl">
+          <div className="text-center">
+            <Typography variant="h2" color="blue-gray" className="mb-4">
+              Get in Touch
+            </Typography>
+            <Typography variant="lead" className="mb-16 font-normal !text-gray-500">
+              No support inbox and no ticket queue — just the repository. Issues get read.
+            </Typography>
+          </div>
 
-              <Card>
-                <CardBody className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <Input label="First Name" crossOrigin="" />
-                    <Input label="Last Name" crossOrigin="" />
-                  </div>
-                  <Input label="Email Address" crossOrigin="" />
-                  <Input label="Subject" crossOrigin="" />
-                  <Textarea label="Message" rows={6} />
-                  <Button color="gray" size="lg" className="w-full">
-                    Send Message
-                  </Button>
-                </CardBody>
-              </Card>
-            </div>
-
-            {/* Contact Information */}
-            <div>
-              <Typography variant="h3" color="blue-gray" className="mb-4">
-                Get in Touch
-              </Typography>
-              <Typography variant="lead" className="mb-8 font-normal !text-gray-500">
-                Reach out to us through any of the following channels.
-              </Typography>
-
-              <div className="space-y-8">
-                <div className="flex items-start gap-4">
+          <div className="space-y-8">
+            {CHANNELS.map(({ icon: Icon, title, description, linkLabel, href }) => {
+              const isExternal = href.startsWith("http")
+              return (
+                <div key={title} className="flex items-start gap-4">
                   <div className="rounded-lg bg-gray-900 p-4">
-                    <PhoneIcon className="size-6 text-white" />
+                    <Icon className="size-6 text-white" />
                   </div>
                   <div>
                     <Typography variant="h6" color="blue-gray" className="mb-1">
-                      Phone
+                      {title}
                     </Typography>
-                    <Typography className="font-normal !text-gray-500">+62 (877) 123-4567</Typography>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="rounded-lg bg-gray-900 p-4">
-                    <EnvelopeIcon className="size-6 text-white" />
-                  </div>
-                  <div>
-                    <Typography variant="h6" color="blue-gray" className="mb-1">
-                      Email
-                    </Typography>
-                    <Typography className="font-normal !text-gray-500">support@culinaize.com</Typography>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="rounded-lg bg-gray-900 p-4">
-                    <MapPinIcon className="size-6 text-white" />
-                  </div>
-                  <div>
-                    <Typography variant="h6" color="blue-gray" className="mb-1">
-                      Address
-                    </Typography>
-                    <Typography className="font-normal !text-gray-500">
-                      123 Learning Street
-                      <br />
-                      Education City, EC 12345
-                      <br />
-                      Indonesia
+                    <Typography className="mb-2 font-normal !text-gray-500">{description}</Typography>
+                    <Typography
+                      as="a"
+                      href={href}
+                      target={isExternal ? "_blank" : "_self"}
+                      rel={isExternal ? "noreferrer noopener" : undefined}
+                      className="font-medium text-gray-900 hover:underline"
+                    >
+                      {linkLabel}
                     </Typography>
                   </div>
                 </div>
-              </div>
-            </div>
+              )
+            })}
           </div>
         </div>
       </section>
 
       <Footer />
-    </ThemeProvider>
+    </>
   )
 }

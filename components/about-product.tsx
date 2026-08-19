@@ -3,31 +3,28 @@
 import React from "react";
 import Image from "next/image";
 import { Typography } from "@material-tailwind/react";
-import {
-  AcademicCapIcon,
-  CheckBadgeIcon,
-  InboxIcon,
-} from "@heroicons/react/24/solid";
+import { ChefHat, Leaf, Camera } from "lucide-react";
 
 import FeatureCard from "@/components/feature-card";
 
 const FEATURES = [
   {
-    icon: InboxIcon,
-    title: "Recipe Generation",
+    icon: ChefHat,
+    title: "Cook From What You Have",
     description:
-      "Generate personalized recipes based on your ingredients and preferences.",
+      "Tell it your ingredients and it finds a recipe that fits, instead of sending you shopping.",
   },
   {
-    icon: AcademicCapIcon,
-    title: "Smart Cooking Tips",
+    icon: Leaf,
+    title: "Diet & Intolerance Aware",
     description:
-      "Get intelligent cooking suggestions and techniques to improve your culinary skills.",
+      "Say what you cannot eat and it filters around it — but always check labels yourself.",
   },
   {
-    icon: CheckBadgeIcon,
-    title: "24/7 AI Assistant",
-    description: "Access your personal cooking assistant anytime, anywhere.",
+    icon: Camera,
+    title: "Snap Your Ingredients",
+    description:
+      "Paste or attach a photo of what is in the fridge instead of typing the whole list out.",
   },
 ];
 
@@ -39,7 +36,7 @@ export function AboutProduct() {
           <Image
             width={768}
             height={500}
-            src="/image/online-course.png"
+            src="/image/food.jpg"
             className="max-h-[500px] size-full object-cover scale-110"
             alt="CulinAIze AI cooking assistant"
           />
@@ -52,10 +49,9 @@ export function AboutProduct() {
             variant="lead"
             className="mb-5 max-w-lg px-4 text-left text-lg !text-gray-500 lg:px-0  "
           >
-            Transform your cooking experience with CulinAIze, the intelligent AI tool 
-            that helps you create delicious meals from any ingredients. Whether you&apos;re 
-            a beginner or a seasoned chef, our AI assistant will guide you through 
-            every step of your culinary journey.
+            CulinAIze reads what you have got and finds you something to make with it. Ask in plain
+            language — or send a photo — and it comes back with a recipe from a real recipe database,
+            the steps to cook it, and answers to whatever you ask next.
           </Typography>
 
           <div className="col-span-2 grid grid-cols-1 gap-10 sm:grid-cols-3 ">
